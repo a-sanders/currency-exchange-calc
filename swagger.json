@@ -1,0 +1,540 @@
+{
+    "swagger": "2.0",
+    "basePath": "/api/v1/currency",
+    "paths": {
+        "/pairs/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Currency Pair list successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyPairsDataResponse"
+                        }
+                    }
+                },
+                "description": "Get Currency Pair list",
+                "operationId": "get_currency_pair_list",
+                "tags": [
+                    "pairs"
+                ]
+            },
+            "post": {
+                "responses": {
+                    "201": {
+                        "description": "Currency Pair successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyPairDataResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Malformed data or validations failed."
+                    },
+                    "409": {
+                        "description": "Currency Pair is already exists"
+                    }
+                },
+                "description": "Create new Currency Pair",
+                "operationId": "post_currency_pair_list",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "pairs"
+                ]
+            }
+        },
+        "/pairs/{pair_id}": {
+            "parameters": [
+                {
+                    "description": "The Currency Pair ID",
+                    "name": "pair_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Pair not found"
+                    },
+                    "200": {
+                        "description": "Currency Pair data successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyPair"
+                        }
+                    }
+                },
+                "description": "Get a specific Currency Pair",
+                "operationId": "get_currency_pair",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "pairs"
+                ]
+            },
+            "put": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Pair not found"
+                    },
+                    "204": {
+                        "description": "Currency Pair updated successfully"
+                    },
+                    "400": {
+                        "description": "Malformed data or validations failed."
+                    }
+                },
+                "description": "Update a specific Current Pair",
+                "operationId": "put_currency_pair",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "tags": [
+                    "pairs"
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Pair not found"
+                    },
+                    "204": {
+                        "description": "Currency Pair deleted successfully"
+                    }
+                },
+                "description": "Delete a specific Currency Pair",
+                "operationId": "delete_currency_pair",
+                "tags": [
+                    "pairs"
+                ]
+            }
+        },
+        "/pairs/{pair_id}/history": {
+            "parameters": [
+                {
+                    "description": "The Currency Pair ID",
+                    "name": "pair_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Pair not found"
+                    },
+                    "200": {
+                        "description": "Currency Pair historical data successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyPairHistoricalDataResponse"
+                        }
+                    }
+                },
+                "description": "Get a specific Currency Pair historical data",
+                "operationId": "get_currency_pair_history",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "pairs"
+                ]
+            }
+        },
+        "/rates/": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Currency Rate list successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyRatesDataResponse"
+                        }
+                    }
+                },
+                "description": "Get Currency Rate list",
+                "operationId": "get_currency_rate_list",
+                "tags": [
+                    "rates"
+                ]
+            },
+            "post": {
+                "responses": {
+                    "201": {
+                        "description": "Currency Rate successfully created",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyRateDataResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Malformed data or validations failed."
+                    },
+                    "409": {
+                        "description": "Currency Rate is already exists"
+                    }
+                },
+                "description": "Create new Currency Rate",
+                "operationId": "post_currency_rate_list",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "rate": {
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "rates"
+                ]
+            }
+        },
+        "/rates/{base_code}/{target_code}/{date}": {
+            "parameters": [
+                {
+                    "name": "base_code",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "target_code",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                },
+                {
+                    "name": "date",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "Currency Rate data successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyRate"
+                        }
+                    },
+                    "404": {
+                        "description": "Currency Rate not found"
+                    }
+                },
+                "description": "Calculate rate for given currency pair at given date. In case there is no such currency pair, calculate it by using others.",
+                "operationId": "get_currency_rate_calc",
+                "tags": [
+                    "rates"
+                ]
+            }
+        },
+        "/rates/{rate_id}": {
+            "parameters": [
+                {
+                    "description": "The Currency Rate ID",
+                    "name": "rate_id",
+                    "in": "path",
+                    "required": true,
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Rate not found"
+                    },
+                    "200": {
+                        "description": "Currency Rate data successfully sent",
+                        "schema": {
+                            "$ref": "#/definitions/CurrencyRate"
+                        }
+                    }
+                },
+                "description": "Get a specific Currency Rate",
+                "operationId": "get_currency_rate",
+                "parameters": [
+                    {
+                        "name": "X-Fields",
+                        "in": "header",
+                        "type": "string",
+                        "format": "mask",
+                        "description": "An optional fields mask"
+                    }
+                ],
+                "tags": [
+                    "rates"
+                ]
+            },
+            "put": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Rate not found"
+                    },
+                    "204": {
+                        "description": "Currency Rate updated successfully"
+                    },
+                    "400": {
+                        "description": "Malformed data or validations failed."
+                    }
+                },
+                "description": "Update a specific Current Rate",
+                "operationId": "put_currency_rate",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "required": true,
+                        "in": "body",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "code": {
+                                    "type": "string"
+                                },
+                                "rate": {
+                                    "type": "number"
+                                },
+                                "date": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "tags": [
+                    "rates"
+                ]
+            },
+            "delete": {
+                "responses": {
+                    "404": {
+                        "description": "Currency Rate not found"
+                    },
+                    "204": {
+                        "description": "Currency Rate deleted successfully"
+                    }
+                },
+                "description": "Delete a specific Currency Rate",
+                "operationId": "delete_currency_rate",
+                "tags": [
+                    "rates"
+                ]
+            }
+        }
+    },
+    "info": {
+        "title": "Currency Exchange Calculator API",
+        "version": "1.0",
+        "description": "API service for currency exchange calculator"
+    },
+    "produces": [
+        "application/json"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "tags": [
+        {
+            "name": "pairs",
+            "description": "Currency Pair related operations."
+        },
+        {
+            "name": "rates",
+            "description": "Currency Rate related operations."
+        }
+    ],
+    "definitions": {
+        "CurrencyPair": {
+            "required": [
+                "base_code",
+                "target_code"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "base_code": {
+                    "type": "string"
+                },
+                "target_code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyPairsDataResponse": {
+            "properties": {
+                "pairs": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CurrencyPair"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyPairDataResponse": {
+            "properties": {
+                "status": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "pair": {
+                    "$ref": "#/definitions/CurrencyPair"
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyPairHistoricalDataResponse": {
+            "required": [
+                "base_code",
+                "target_code"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "base_code": {
+                    "type": "string"
+                },
+                "target_code": {
+                    "type": "string"
+                },
+                "rates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CurrencyRate"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyRate": {
+            "required": [
+                "code",
+                "date",
+                "rate"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "rate": {
+                    "type": "number"
+                },
+                "code": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyRatesDataResponse": {
+            "properties": {
+                "rates": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CurrencyRate"
+                    }
+                }
+            },
+            "type": "object"
+        },
+        "CurrencyRateDataResponse": {
+            "properties": {
+                "status": {
+                    "type": "boolean"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "rate": {
+                    "$ref": "#/definitions/CurrencyRate"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "responses": {
+        "ParseError": {
+            "description": "When a mask can't be parsed"
+        },
+        "MaskError": {
+            "description": "When any error occurs on mask"
+        }
+    }
+}
