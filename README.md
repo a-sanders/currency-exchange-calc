@@ -23,10 +23,9 @@ shell   Run a shell in the app context.
 
 ## Environment
 To setup application environment you have to create environment variables
-```
-set FLASK_APP=calc.py
-set FLASK_ENV=dev
- 
+```sh
+$ FLASK_APP=calc.py
+$ FLASK_ENV=prod 
 ```
 or create file .env of this content:
 ```
@@ -38,10 +37,7 @@ FLASK_CONFIG=prod
 ```sh
 $ pipenv shell
 
-# (Optional for development, recommended)
 $ flask db init # Initializes a new database.
-$ flask db migrate # Creates the alembic tables in the database.
-
 $ flask db upgrade # Creates the model tables in the database.
 
 # To populate initial data from file:
