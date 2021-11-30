@@ -21,6 +21,19 @@ seed    Populate initial data from CSV file.
 shell   Run a shell in the app context.
 ```
 
+## Environment
+To setup application environment you have to create environment variables
+```
+set FLASK_APP=calc.py
+set FLASK_ENV=dev
+ 
+```
+or create file .env of this content:
+```
+FLASK_APP=calc
+FLASK_CONFIG=prod
+```
+
 ## Running
 ```sh
 $ pipenv shell
